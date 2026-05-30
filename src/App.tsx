@@ -1,7 +1,6 @@
-import { useEffect, useRef, useState } from "react";
-
 const APP_URL = "https://app.zylith.fi";
 const DOCS_URL = "https://docs.zylith.fi";
+const WHITEPAPER_URL = "https://whitepaper.zylith.fi";
 const GITHUB_URL = "https://github.com/zylithfi";
 const TWITTER_URL = "https://x.com/zylith.fi";
 const DISCORD_URL = "https://discord.gg/zylith";
@@ -43,21 +42,6 @@ const executionLayers = [
     "The private witness contains consumed notes, nullifiers, output commitments, fees, fills, and the clearing price. Public calldata carries root commitments, and Starknet finalizes the batch only after the proof facts verify.",
   ],
 ];
-
-function useReducedMotion() {
-  const [reducedMotion, setReducedMotion] = useState(false);
-
-  useEffect(() => {
-    const query = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const update = () => setReducedMotion(query.matches);
-
-    update();
-    query.addEventListener("change", update);
-    return () => query.removeEventListener("change", update);
-  }, []);
-
-  return reducedMotion;
-}
 
 function Nav() {
   return (
@@ -107,54 +91,33 @@ function FooterGlyph({ icon }: { icon: string }) {
   );
 }
 
-function PressureHero() {
-  const reducedMotion = useReducedMotion();
-  const heroRef = useRef<HTMLElement | null>(null);
-  const [progress, setProgress] = useState(0);
-
-  useEffect(() => {
-    if (reducedMotion) {
-      setProgress(1);
-      return;
-    }
-
-    const update = () => {
-      const hero = heroRef.current;
-      if (!hero) return;
-
-      const rect = hero.getBoundingClientRect();
-      const viewportHeight = Math.max(1, window.innerHeight);
-      const stickyDistance = Math.max(1, hero.offsetHeight - viewportHeight);
-      const scrolled = Math.min(Math.max(-rect.top, 0), stickyDistance);
-      const rawProgress = scrolled / stickyDistance;
-      setProgress(rawProgress);
-    };
-
-    update();
-    window.addEventListener("scroll", update, { passive: true });
-    return () => window.removeEventListener("scroll", update);
-  }, [reducedMotion]);
-
-  const rectProgress = Math.min(Math.pow(Math.min(progress / 0.78, 1), 1.42), 1);
-  const revealed = progress > 0.78;
-
+function ArrowIcon() {
   return (
-    <section className="pressure-hero" ref={heroRef}>
-      <div className="pressure-stage">
-        <div className="pressure-rects" aria-hidden="true">
-          {Array.from({ length: 14 }, (_, index) => (
-            <span
-              key={index}
-              style={{ inset: `${28 + index * 35 * (1 - rectProgress * 0.37)}px` }}
-            />
-          ))}
-        </div>
+    <svg className="btn-arrow" viewBox="0 0 12 12" aria-hidden="true" focusable="false">
+      <path d="M3 3h6v6M9 3 3 9" />
+    </svg>
+  );
+}
 
-        <div className={`hero-copy ${revealed ? "is-visible" : ""}`}>
-          <h1>Starknet&rsquo;s call auction darkpool.</h1>
-          <p>
-            Trade through call auctions where price, size, and side stay private.
-          </p>
+function GradientFlowHero() {
+  return (
+    <section className="gradient-hero">
+      <div className="vl-flow" aria-hidden="true">
+        <div className="vl-p vl-p1" />
+        <div className="vl-p vl-p2" />
+        <div className="vl-p vl-p3" />
+        <div className="vl-p vl-p4" />
+      </div>
+      <div className="vl-vig" aria-hidden="true" />
+      <div className="hero-copy">
+        <h1>Starknet&rsquo;s call auction darkpool.</h1>
+        <p className="lede">Trade through call auctions where price, size, and side stay private.</p>
+        <div className="hero-cta">
+          <a className="cut-button" href={APP_URL}>Launch Zylith</a>
+          <a className="outline-button" href={WHITEPAPER_URL}>
+            Whitepaper
+            <ArrowIcon />
+          </a>
         </div>
       </div>
     </section>
@@ -251,10 +214,7 @@ function FinalCta() {
           Launch Zylith
         </a>
         <a className="outline-button" href={DOCS_URL}>
-          Read Docs
-        </a>
-        <a className="outline-button" href={GITHUB_URL}>
-          GitHub
+          Docs
         </a>
       </div>
     </section>
@@ -294,7 +254,7 @@ export default function App() {
     <div className="site-shell">
       <Nav />
       <main>
-        <PressureHero />
+        <GradientFlowHero />
         <AccessPrivacy />
         <CorePillars />
         <ExecutionLayers />
