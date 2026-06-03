@@ -35,7 +35,7 @@ const executionLayers = [
   ],
   [
     "Private Matching",
-    "Encrypted orders are opened only inside the private execution prover. The clearing path checks funding notes, side, size, limits, min-fill rules, all-or-none constraints, and maker-curve capacity before producing the fill plan. No public book is exposed during matching.",
+    "Encrypted orders are opened inside the private execution prover boundary. The clearing path checks funding notes, side, size, limits, min-fill rules, all-or-none constraints, and maker-curve capacity before producing the fill plan. No public book is exposed during matching.",
   ],
   [
     "ZK-STARK Settlement",
@@ -176,10 +176,10 @@ function AccessPrivacy() {
           </article>
         ))}
         <p className="access-timeline-defenses">
-          Zylith addresses the full surface with fixed epochs, root-only settlement,
-          padded output bundles, pair heartbeats, privacy gates, delayed artifacts,
-          submission smoothing, and fresh child commitments reducing what can be
-          inferred beyond the proof.
+          Zylith address the broader surface with fixed epochs, root-only
+          settlement, padded output bundles, pair heartbeats, delayed artifacts,
+          submission smoothing, and fresh child commitments reducing information
+          leakage beyond the contents of individual orders.
         </p>
       </div>
     </section>
@@ -208,7 +208,7 @@ function ExecutionLayers() {
 function FinalCta() {
   return (
     <section className="final-cta">
-      <p>Call auction execution for private Starknet capital.</p>
+      <p>Execution Privacy Beyond Order Flow.</p>
       <div className="cta-links">
         <a className="cut-button" href={APP_URL}>
           Launch Zylith

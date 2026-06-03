@@ -473,7 +473,7 @@ a {
 }
 
 .final-cta {
-  padding: 88px clamp(20px, 5vw, 72px);
+  padding: 88px clamp(20px, 5vw, 72px) 176px;
   text-align: center;
 }
 
@@ -502,7 +502,7 @@ a {
   min-height: 72px;
   padding: 0 clamp(20px, 4vw, 48px);
   border-top: 1px solid rgba(37, 61, 107, 0.2);
-  color: var(--z-mid);
+  color: var(--z-frost);
   font-family: "IBM Plex Mono", ui-monospace, monospace;
   font-size: 11px;
 }
