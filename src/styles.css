@@ -181,59 +181,26 @@ a {
   padding-top: 66px;
 }
 
-.vl-flow {
+.halftone-canvas {
   position: absolute;
-  inset: -30%;
+  inset: 0;
   z-index: 0;
-  filter: blur(70px);
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
-.vl-p {
-  position: absolute;
-  width: 70%;
-  height: 70%;
-  border-radius: 46%;
-}
-
-.vl-p1 {
-  background: radial-gradient(circle, #1c3a6e, transparent 60%);
-  left: -6%;
-  top: -6%;
-  animation: vl-f1 24s ease-in-out infinite alternate;
-}
-
-.vl-p2 {
-  background: radial-gradient(circle, #244e85, transparent 60%);
-  right: -10%;
-  top: 8%;
-  animation: vl-f2 28s ease-in-out infinite alternate;
-}
-
-.vl-p3 {
-  background: radial-gradient(circle, #16315c, transparent 60%);
-  left: 18%;
-  bottom: -14%;
-  animation: vl-f3 26s ease-in-out infinite alternate;
-}
-
-.vl-p4 {
-  background: radial-gradient(circle, #2a5a98, transparent 62%);
-  right: 14%;
-  bottom: -8%;
-  animation: vl-f4 30s ease-in-out infinite alternate;
-}
-
-@keyframes vl-f1 { to { transform: translate(18%, 14%) scale(1.2); } }
-@keyframes vl-f2 { to { transform: translate(-16%, 18%) scale(1.1); } }
-@keyframes vl-f3 { to { transform: translate(14%, -16%) scale(1.25); } }
-@keyframes vl-f4 { to { transform: translate(-12%, -12%) scale(1.15); } }
-
-.vl-vig {
+.halftone-vignette {
   position: absolute;
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background: radial-gradient(ellipse 56% 70% at 30% 50%, rgba(5, 8, 14, 0.74), transparent 64%);
+  background: radial-gradient(
+    ellipse 56% 60% at 50% 52%,
+    rgba(7, 9, 14, 0.55),
+    rgba(7, 9, 14, 0.22) 40%,
+    transparent 68%
+  );
 }
 
 .hero-copy {
@@ -601,7 +568,4 @@ a {
     animation-iteration-count: 1 !important;
   }
 
-  .vl-p {
-    animation: none !important;
-  }
 }

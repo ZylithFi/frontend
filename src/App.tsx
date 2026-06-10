@@ -1,3 +1,6 @@
+import { useEffect, useRef } from "react";
+import { HalftoneField } from "./halftoneField";
+
 const APP_URL = "https://app.zylith.fi";
 const DOCS_URL = "https://docs.zylith.fi";
 const WHITEPAPER_URL = "https://whitepaper.zylith.fi";
@@ -100,15 +103,33 @@ function ArrowIcon() {
 }
 
 function GradientFlowHero() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const field = new HalftoneField(canvas, {
+      cols: 350,
+      intensity: 0.9,
+      speed: 2,
+      waveFlow: true,
+      calmPulse: true,
+      introSpeed: 0.35,
+    });
+    field.start();
+
+    window.addEventListener("resize", field.resize);
+    return () => {
+      field.stop();
+      window.removeEventListener("resize", field.resize);
+    };
+  }, []);
+
   return (
     <section className="gradient-hero">
-      <div className="vl-flow" aria-hidden="true">
-        <div className="vl-p vl-p1" />
-        <div className="vl-p vl-p2" />
-        <div className="vl-p vl-p3" />
-        <div className="vl-p vl-p4" />
-      </div>
-      <div className="vl-vig" aria-hidden="true" />
+      <canvas className="halftone-canvas" ref={canvasRef} aria-hidden="true" />
+      <div className="halftone-vignette" aria-hidden="true" />
       <div className="hero-copy">
         <h1>Starknet&rsquo;s call auction darkpool.</h1>
         <p className="lede">Trade through call auctions where price, size, and side stay private.</p>
