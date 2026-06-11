@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { HalftoneField } from "./halftoneField";
+import { CausticField } from "./causticField";
 
 const APP_URL = "https://app.zylith.fi";
 const DOCS_URL = "https://docs.zylith.fi";
@@ -102,20 +102,21 @@ function ArrowIcon() {
   );
 }
 
-function GradientFlowHero() {
+function CausticHero() {
+  const sectionRef = useRef<HTMLElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    const field = new HalftoneField(canvas, {
-      cols: 350,
+    const field = new CausticField(canvas, {
+      mode: "caustics-deep",
+      speed: 1.05,
       intensity: 0.9,
-      speed: 2,
-      waveFlow: true,
-      calmPulse: true,
       introSpeed: 0.35,
+      calmPulse: true,
+      mouse: false,
     });
     field.start();
 
@@ -126,14 +127,54 @@ function GradientFlowHero() {
     };
   }, []);
 
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+    let raf = 0;
+    const reduce =
+      typeof window.matchMedia === "function" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const update = () => {
+      raf = 0;
+      const canvas = canvasRef.current;
+      const copy = section.querySelector<HTMLElement>(".cx-copy");
+      const dim = section.querySelector<HTMLElement>(".cx-dim");
+      if (!canvas || !copy || !dim) return;
+      const h = section.offsetHeight || window.innerHeight;
+      const progress = Math.min(1, Math.max(0, window.scrollY / Math.max(1, h)));
+      canvas.style.transform = "";
+      copy.style.transform = "";
+      copy.style.opacity = "";
+      dim.style.opacity = "0";
+      if (reduce) return;
+      const eased = progress * progress * (3 - 2 * progress);
+      canvas.style.transform = `translateY(${(-eased * 90).toFixed(1)}px)`;
+      copy.style.transform = `translateY(${(-eased * 180).toFixed(1)}px)`;
+      copy.style.opacity = Math.max(0, 1 - progress * 1.5).toFixed(3);
+      dim.style.opacity = (eased * 0.92).toFixed(3);
+    };
+    const schedule = () => {
+      if (!raf) raf = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    return () => {
+      if (raf) cancelAnimationFrame(raf);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+    };
+  }, []);
+
   return (
-    <section className="gradient-hero">
-      <canvas className="halftone-canvas" ref={canvasRef} aria-hidden="true" />
-      <div className="halftone-vignette" aria-hidden="true" />
-      <div className="hero-copy">
+    <section className="cx-hero" ref={sectionRef}>
+      <canvas className="cx-canvas" ref={canvasRef} aria-hidden="true" />
+      <div className="cx-vig" aria-hidden="true" />
+      <div className="cx-dim" aria-hidden="true" />
+      <div className="cx-copy">
         <h1>Starknet&rsquo;s call auction darkpool.</h1>
         <p className="lede">Trade through call auctions where price, size, and side stay private.</p>
-        <div className="hero-cta">
+        <div className="cx-cta">
           <a className="cut-button" href={APP_URL}>Launch Zylith</a>
           <a className="outline-button" href={WHITEPAPER_URL}>
             Whitepaper
@@ -275,11 +316,13 @@ export default function App() {
     <div className="site-shell">
       <Nav />
       <main>
-        <GradientFlowHero />
-        <AccessPrivacy />
-        <CorePillars />
-        <ExecutionLayers />
-        <FinalCta />
+        <CausticHero />
+        <div className="scroll-content">
+          <AccessPrivacy />
+          <CorePillars />
+          <ExecutionLayers />
+          <FinalCta />
+        </div>
       </main>
       <Footer />
     </div>

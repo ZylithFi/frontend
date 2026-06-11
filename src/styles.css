@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@config "../tailwind.config.ts";
 
 :root {
   color-scheme: dark;
@@ -171,17 +170,16 @@ a {
   background: rgba(15, 24, 37, 0.42);
 }
 
-.gradient-hero {
-  position: relative;
-  min-height: 100svh;
-  display: grid;
-  align-items: center;
+.cx-hero {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  height: 100svh;
   overflow: hidden;
-  background: var(--z-void);
-  padding-top: 66px;
+  background: #04060a;
 }
 
-.halftone-canvas {
+.cx-canvas {
   position: absolute;
   inset: 0;
   z-index: 0;
@@ -190,23 +188,30 @@ a {
   display: block;
 }
 
-.halftone-vignette {
+.cx-vig {
   position: absolute;
   inset: 0;
   z-index: 1;
   pointer-events: none;
-  background: radial-gradient(
-    ellipse 56% 60% at 50% 52%,
-    rgba(7, 9, 14, 0.55),
-    rgba(7, 9, 14, 0.22) 40%,
-    transparent 68%
-  );
+  background: radial-gradient(ellipse 58% 64% at 50% 50%, rgba(4, 6, 10, 0.62), rgba(4, 6, 10, 0.22) 42%, transparent 68%);
 }
 
-.hero-copy {
+.cx-dim {
   position: absolute;
   inset: 0;
   z-index: 2;
+  pointer-events: none;
+  background: var(--z-void);
+  opacity: 0;
+}
+
+.cx-copy {
+  position: absolute;
+  top: 64px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -215,7 +220,7 @@ a {
   text-align: center;
 }
 
-.hero-copy h1 {
+.cx-copy h1 {
   margin: 0;
   color: var(--z-white);
   font-family: "Archivo Variable", Archivo, ui-sans-serif, system-ui, sans-serif;
@@ -227,7 +232,7 @@ a {
   text-wrap: balance;
 }
 
-.hero-copy .lede {
+.cx-copy .lede {
   margin-top: 18px;
   max-width: 52ch;
   color: var(--z-frost);
@@ -238,7 +243,7 @@ a {
   text-wrap: pretty;
 }
 
-.hero-cta {
+.cx-cta {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -246,17 +251,17 @@ a {
   margin-top: 32px;
 }
 
-.hero-cta .cut-button,
-.hero-cta .outline-button {
+.cx-cta .cut-button,
+.cx-cta .outline-button {
   min-height: 42px;
   padding: 0 22px;
   font-size: 12px;
 }
 
-.hero-cta .outline-button:hover {
-  border-color: rgba(54, 83, 128, 0.6);
-  background: none;
-  box-shadow: 0 0 14px rgba(54, 83, 128, 0.2), inset 0 0 10px rgba(54, 83, 128, 0.08);
+.scroll-content {
+  position: relative;
+  z-index: 2;
+  background: var(--z-void);
 }
 
 .btn-arrow {
@@ -548,11 +553,11 @@ a {
 }
 
 @media (max-width: 480px) {
-  .hero-copy {
+  .cx-copy {
     padding: 0 20px;
   }
 
-  .hero-cta {
+  .cx-cta {
     flex-direction: column;
     align-items: center;
   }
