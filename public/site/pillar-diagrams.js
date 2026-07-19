@@ -163,8 +163,8 @@
     cap(ctx, w, h, u, "ORDERS ALIGN TO THE PROTOCOL CLOCK", A);
   }
 
-  /* ══ 02 · THE SUBSURFACE CURVE  (Hidden Maker Liquidity) ═══════════════
-     A luminous liquidity curve spans a dark panel. A reveal sweep lifts the
+  /* == 02 · THE SUBSURFACE CURVE  (Hidden LP Liquidity) ==================
+     A luminous liquidity slice spans a dark panel. A reveal sweep lifts the
      veil to show the weight of hidden depth, then re-veils.                  */
   function subsurface(ctx, t, w, h) {
     var P = 9, lt = t % P, u = h / 560, A = shell(ctx, w, h, lt, P);
@@ -219,7 +219,7 @@
     pill(ctx, "DEPTH · REVEAL ON CONSUME", px, py - 20 * u, u, C.bright, A);
     txt(ctx, "SHAPE HELD PRIVATE", px + pw, py - 12 * u, 8 * u, hex(C.body, A), { align: "right", track: 1.4 * u });
     vign(ctx, w, h);
-    eyebrow(ctx, w, h, u, "HIDDEN MAKER LIQUIDITY", A);
+    eyebrow(ctx, w, h, u, "HIDDEN LP DEPTH", A);
     cap(ctx, w, h, u, "DEPTH HELD BENEATH THE SURFACE", A);
   }
 
@@ -668,7 +668,7 @@
     { id: "clearing", title: "The Clearing Line", concept: "Clearing Price",
       meta: "Uniform Price · Locked",
       frameClass: "frame-open",
-      mechanism: "Every batch clears at one uniform price. Private limits and hidden maker depth meet where executable volume is greatest, and all eligible orders settle at that single line.",
+      mechanism: "Every batch clears at one uniform price. Private limits and hidden LP depth meet where executable volume is greatest, and all eligible orders settle at that single line.",
       options: [
         { label: "Cross", html:
           '<div class="opt-stage">' +
@@ -710,9 +710,9 @@
           '<div class="opt-status">Volume Maximized</div>' +
           '</div>' }
       ] },
-    { id: "subsurface", title: "The Subsurface Curve", concept: "Hidden Maker Liquidity",
+    { id: "subsurface", title: "The Subsurface Curve", concept: "Hidden LP Liquidity",
       meta: "System Scanner · Active",
-      mechanism: "Makers quote hidden curves across price levels; the auction consumes eligible depth without exposing shape or inventory.", draw: subsurface },
+      mechanism: "Private liquidity positions materialize hidden slices across price levels; the auction consumes eligible depth without exposing shape or reserves.", draw: subsurface },
     { id: "kinetic", title: "Private Matching", concept: "Private Matching",
       meta: "Atomic Execution Logic",
       frameClass: "frame-glass",

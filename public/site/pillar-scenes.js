@@ -3,8 +3,8 @@
   (function () {
     var DPR = Math.min(2, window.devicePixelRatio || 1);
     var TAU = Math.PI * 2;
-    /* Hidden Maker Liquidity curve, rendered without panel chrome or labels. */
-    function makerCurve(ctx, t, w, h) {
+    /* Hidden LP liquidity slice, rendered without panel chrome or labels. */
+    function liquiditySlice(ctx, t, w, h) {
       ctx.clearRect(0, 0, w, h);
       var u = h / 560, P = 9, lt = t % P;
       var midY = h * 0.44, ampRef = h * 0.46;
@@ -44,7 +44,7 @@
       ctx.fillStyle = rgl; ctx.beginPath(); ctx.arc(revealX, ry, 18 * u, 0, TAU); ctx.fill();
       ctx.fillStyle = hx(C.white, 1); ctx.beginPath(); ctx.arc(revealX, ry, 2.6 * u, 0, TAU); ctx.fill();
     }
-    var LOCAL = { 'maker-curve': makerCurve };
+    var LOCAL = { 'liquidity-slice': liquiditySlice };
     window.__ZHIDELABELS = true;
     window.__ZTRANSPARENTBG = true;
     var byId = {}; (window.ZYLITH_DIAGRAMS || []).forEach(function (p) { byId[p.id] = p; });

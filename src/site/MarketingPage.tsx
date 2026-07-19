@@ -97,7 +97,7 @@ function Header() {
 function Hero() {
   return (
     <section className="cx-hero" data-screen-label="Hero">
-      <canvas className="cx-canvas" id="cxglass" aria-hidden="true" />
+      <div className="cx-canvas" aria-hidden="true" />
       <div className="cx-vig" aria-hidden="true" />
       <div className="cx-dim" aria-hidden="true" />
       <div className="cx-copy">
@@ -144,14 +144,14 @@ function CorePillars() {
 
       <article className="pillar-row has-diagram diag-left">
         <div>
-          <h2>Hidden Maker Liquidity</h2>
+          <h2>Hidden LP Liquidity</h2>
           <p>
-            Makers quote hidden curves across price levels. The auction can consume eligible depth without exposing
-            inventory, curve shape, or unfilled depth.
+            Private liquidity positions materialize hidden slices across price levels. The auction can consume eligible
+            depth without exposing reserves, policy shape, or unfilled depth.
           </p>
         </div>
         <div className="pillar-canvas">
-          <canvas data-scene="maker-curve" />
+          <canvas data-scene="liquidity-slice" />
         </div>
       </article>
 
@@ -313,8 +313,8 @@ function ExecutionSection() {
           <article className="execution-layer exec-slide">
             <h2>Clearing Price</h2>
             <p>
-              Zylith clears each batch at one uniform price. Private limit orders define acceptable bounds; hidden maker
-              curves add depth across price levels. The auction chooses the price that maximizes executable volume while
+              Zylith clears each batch at one uniform price. Private limit orders define acceptable bounds; hidden LP
+              slices add depth across price levels. The auction chooses the price that maximizes executable volume while
               minimizing imbalance, then settles only orders whose limits are compatible with the clearing price.
             </p>
           </article>
@@ -322,7 +322,7 @@ function ExecutionSection() {
             <h2>Private Matching</h2>
             <p>
               Encrypted orders are opened inside the private execution prover boundary. The clearing path checks funding
-              notes, side, size, limits, min-fill rules, all-or-none constraints, and maker-curve capacity before producing
+              notes, side, size, limits, min-fill rules, all-or-none constraints, and LP-slice capacity before producing
               the fill plan. No public book is exposed during matching.
             </p>
           </article>
@@ -356,7 +356,7 @@ function AccessPrivacySection() {
             <tr>
               <th aria-label="Privacy boundary" />
               <th className="c">ZK proof alone</th>
-              <th className="c">Zylith batch design</th>
+              <th className="c">Zylith</th>
             </tr>
           </thead>
           <tbody>
@@ -364,7 +364,7 @@ function AccessPrivacySection() {
               <td>
                 <div className="bd">01 · Order contents</div>
                 <div className="sm">
-                  Side, size, limit price, funding identity, and maker intent must stay hidden from other traders, block
+                  Side, size, limit price, funding identity, and LP position state must stay hidden from other traders, block
                   proposers, and the public record.
                 </div>
               </td>
@@ -473,7 +473,7 @@ export function MarketingPage() {
           <section className="content-section zylith-explainer" data-screen-label="Explainer">
             <p>
               <span className="zname">Zylith</span> is a DEX for private spot execution that clears encrypted orders
-              against hidden maker liquidity through uniform price call auctions.
+              against hidden LP liquidity through uniform price call auctions.
             </p>
           </section>
           <CorePillars />

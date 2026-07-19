@@ -93,7 +93,7 @@
     ctx.strokeStyle = hex(C.mid, 0.45 * prog * (a == null ? 1 : a)); ctx.lineWidth = 1;
     ctx.strokeRect(x + 0.5, y + 0.5, w * prog - 1, h - 1);
   }
-  // frosted hatch veil - for "hidden" things (maker curves, balances)
+  // frosted hatch veil - for hidden liquidity and balances
   function veil(ctx, x, y, w, h, u, a) {
     a = a == null ? 1 : a; ctx.save();
     ctx.beginPath(); ctx.rect(x, y, w, h); ctx.clip();
