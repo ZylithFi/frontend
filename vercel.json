@@ -1,5 +1,17 @@
 {
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
-  "framework": "vite"
+  "framework": "vite",
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "https://app.zylith.fi",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "destination": "https://app.zylith.fi/$1",
+      "permanent": true
+    }
+  ]
 }

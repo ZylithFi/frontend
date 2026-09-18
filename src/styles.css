@@ -717,7 +717,7 @@ a { color: inherit; text-decoration: none; }
       .pillar-row.diag-left > :first-child, .pillar-row.diag-left > :last-child { order: 0; justify-self: stretch; text-align: left; }
       .pillar-row.diag-left > :first-child p { margin-left: 0; } }
 
-    /* === Hidden LP Liquidity - subsurface depth === */
+    /* === Private residual flow - subsurface depth === */
     .sub-svg { position: absolute; inset: 0; width: 100%; height: 100%; }
     .sub-strata { position: absolute; left: 0; right: 0; bottom: 0; height: 46%;
       background-image: repeating-linear-gradient(0deg, rgba(168,200,255,0.09) 0 1px, transparent 1px 14px); opacity: 0.5; }

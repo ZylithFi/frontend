@@ -144,14 +144,14 @@ function CorePillars() {
 
       <article className="pillar-row has-diagram diag-left">
         <div>
-          <h2>Hidden LP Liquidity</h2>
+          <h2>Private Residual Completion</h2>
           <p>
-            Private liquidity positions materialize hidden slices across price levels. The auction can consume eligible
-            depth without exposing reserves, policy shape, or unfilled depth.
+            Private orders cross before any external execution is considered. Unmatched obligations are completed through
+            a controlled execution path without exposing the individual order that created them.
           </p>
         </div>
         <div className="pillar-canvas">
-          <canvas data-scene="liquidity-slice" />
+          <canvas data-scene="residual-flow" />
         </div>
       </article>
 
@@ -313,16 +313,16 @@ function ExecutionSection() {
           <article className="execution-layer exec-slide">
             <h2>Clearing Price</h2>
             <p>
-              Zylith clears each batch at one uniform price. Private limit orders define acceptable bounds; hidden LP
-              slices add depth across price levels. The auction chooses the price that maximizes executable volume while
-              minimizing imbalance, then settles only orders whose limits are compatible with the clearing price.
+              Zylith clears each batch at one uniform price. Private limit orders define acceptable bounds, and the auction
+              chooses the price that maximizes executable volume while minimizing imbalance. Unmatched obligations remain
+              subject to the order's completion preference.
             </p>
           </article>
           <article className="execution-layer exec-slide">
             <h2>Private Matching</h2>
             <p>
               Encrypted orders are opened inside the private execution prover boundary. The clearing path checks funding
-              notes, side, size, limits, min-fill rules, all-or-none constraints, and LP-slice capacity before producing
+              notes, side, size, limits, min-fill rules, all-or-none constraints, and completion constraints before producing
               the fill plan. No public book is exposed during matching.
             </p>
           </article>
@@ -364,8 +364,8 @@ function AccessPrivacySection() {
               <td>
                 <div className="bd">01 · Order contents</div>
                 <div className="sm">
-                  Side, size, limit price, funding identity, and LP position state must stay hidden from other traders, block
-                  proposers, and the public record.
+                  Side, size, limit price, funding identity, and private execution state must stay hidden from other traders,
+                  block proposers, and the public record.
                 </div>
               </td>
               <td className="c">
@@ -473,7 +473,8 @@ export function MarketingPage() {
           <section className="content-section zylith-explainer" data-screen-label="Explainer">
             <p>
               <span className="zname">Zylith</span> is a DEX for private spot execution that clears encrypted orders
-              against hidden LP liquidity through uniform price call auctions.
+              through uniform price call auctions, then completes eligible residual obligations through a controlled
+              execution path.
             </p>
           </section>
           <CorePillars />
