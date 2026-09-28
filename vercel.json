@@ -1,0 +1,19 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": null,
+  "installCommand": "",
+  "buildCommand": "mkdir -p public && printf '<!doctype html>' > public/index.html",
+  "outputDirectory": "public",
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "https://app.zylith.fi",
+      "permanent": true
+    },
+    {
+      "source": "/(.*)",
+      "destination": "https://app.zylith.fi/$1",
+      "permanent": true
+    }
+  ]
+}
